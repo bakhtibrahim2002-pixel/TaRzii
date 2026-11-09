@@ -97,7 +97,7 @@ client.on('messageCreate', async message => {
             setTimeout(() => reply.delete(), 4000); // حذف رسالة التأكيد بعد 4 ثوانٍ
         } catch (error) {
             console.error(error);
-            message.replyحدث خطأ أثناء محاولة مسح الرسائل.');
+            message.reply('حدث خطأ أثناء محاولة مسح الرسائل.');
         }
     }
 });
