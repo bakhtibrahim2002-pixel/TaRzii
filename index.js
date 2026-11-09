@@ -101,30 +101,3 @@ client.on('messageCreate', async message => {
         }
     }
 });
-client.on('messageCreate', async message => {
-    if (message.author.bot) return;
-
-    if (message.content.startsWith('!giverole')) {
-        // التحقق من صلاحية المستخدم (إدارة الرتب)
-        if (!message.member.permissions.has('ManageRoles')) {
-            return message.reply('ليس لديك صلاحية لإدارة الرتب!');
-        }
-
-        // استخراج العضو المذكور والرتبة المذكورة في الرسالة
-        const member = message.mentions.members.first();
-        const role = message.mentions.roles.first();
-
-        if (!member || !role) {
-            return message.reply('الرجاء تحديد العضو والرتبة بشكل صحيح. مثال: `!giverole @User @Role`');
-        }
-
-        try {
-            // إعطاء الرتبة للعضو
-            await member.roles.add(role);
-            message.reply(`تم بنجاح إعطاء الرتبة ${role.name} إلى العضو ${member.user.tag}`);
-        } catch (error) {
-            console.error(error);
-            message.reply('فشل البوت في إعطاء الرتبة. تأكد من أن رتبة البوت أعلى من الرتبة المراد إعطاؤها وأنه يملك صلاحية Manage Roles.');
-        }
-    }
-});
